@@ -132,6 +132,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.40.2</version>
+				<configuration>
+					<registry>ghcr.io</registry>
+					<images>
+						<image>
+							<name>ssi-mz-studygroup/hello-app</name>
+							<build>
+								<tags>
+									<tag>${image.tag}</tag>
+								</tags>
+								<contextDir>${project.basedir}</contextDir>
+								<cleanup>try</cleanup>
+							</build>
+						</image>
+					</images>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
