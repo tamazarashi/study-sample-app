@@ -1,25 +1,12 @@
-# jarのビルド
-mvn clean package
-# コンテナイメージのビルド
-docker build -t hello-app .
-# ローカルリポジトリに登録されていることの確認(hello-appがあること)
-docker images hello-app
-# コンテナの実行
-docker run -p 7001:7001 --name hello-app --rm hello-app
-# REST APIへのリクエスト(別のターミナルから)
-curl -X GET localhost:7001/api/hello
-
+# ベースイメージはeclipse-temurin(旧OpenJDK)のJava17を使用
 FROM docker.io/eclipse-temurin:17-jre-alpine
-ENV HOME="/root"
-RUN mkdir $HOME
-COPY libs/ $HOME
-#ARG version=1
-#FROM busybox:$version
 
-# httpd container
-#ENV HOME="/var/www/html/"
-#RUN mkdir $HOME
-#COPY index.html $HOME
-#EXPOSE 80
-#CMD ["-h", "/var/www/html/"]
-#ENTRYPOINT [ "httpd", "-f" ]
+# 作業ディレクトリを/(root)にする
+WORKDIR /
+# Mavenのビルド成果物(sample-app.jar)をコンテナイメージにCOPY
+COPY ./target/hello-app.jar ./
+# Mavenのビルド成果物(libs以下を)をコンテナイメージにCOPY
+COPY ./target/libs ./libs
+
+# ExecutableJarをjavaコマンドで起動
+CMD ["java", "-jar", "./hello-app.jar"]
