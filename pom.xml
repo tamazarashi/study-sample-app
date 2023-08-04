@@ -138,7 +138,7 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.40.2</version>
 				<configuration>
-					<registry>ghcr.io</registry>
+					<registry>tamazarashi</registry>
 					<images>
 						<image>
 							<name>study-sample-app/hello-app</name>
