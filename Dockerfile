@@ -12,7 +12,7 @@ curl -X GET localhost:7001/api/hello
 FROM docker.io/eclipse-temurin:17-jre-alpine
 ENV HOME="/root"
 RUN mkdir $HOME
-COPY hello-app.jar $HOME
+COPY libs/ $HOME
 #ARG version=1
 #FROM busybox:$version
 
