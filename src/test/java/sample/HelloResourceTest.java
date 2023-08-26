@@ -31,7 +31,7 @@ public class HelloResourceTest {
 
     @Test
     void tesHello() {
-        var expected = "Hello";
+        var expected = "HelloVal";
         var actual = helllResource.hello();
         assertEquals(expected, actual);
     }
